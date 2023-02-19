@@ -1,0 +1,12 @@
+First project tutorial:
+https://www.youtube.com/watch?v=XtQMytORBmM
+
+VS Code set up:
+https://www.youtube.com/watch?v=3GVGyooZ8jk
+Settings
+	-> Omnisharp: Use Modern Net ->uncheck
+	-> Omnisharp: Mono Path -> /Library/Frameworks/Mono.framework/Versions/Current
+
+Unit testing:
+https://www.youtube.com/watch?v=pr5FBtu5SvQ
+https://www.youtube.com/watch?v=arzREy5zLVU
