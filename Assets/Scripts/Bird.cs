@@ -4,18 +4,20 @@ namespace FlappyBird
 {
 	public class Bird : MonoBehaviour
 	{
-		public Rigidbody2D myRigidBody;
+		[SerializeField] private Rigidbody2D myRigidBody;
+		private Jumper _jumper;
+
 		// Start is called before the first frame update
 		void Start()
 		{
-			
+			_jumper = new Jumper(myRigidBody);
 		}
 
 		// Update is called once per frame
 		void Update()
 		{
 			if (Input.GetKeyDown(KeyCode.Space))
-				myRigidBody.velocity = Vector2.up * 10;
+				_jumper.Move();
 		}
 	}
 }

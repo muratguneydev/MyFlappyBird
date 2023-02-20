@@ -26,39 +26,39 @@ public class PipeSpawnerTests
         yield return null;
     }
 
-	[UnityTest]//, Category(TestCategoryConstants.Controllers.HydraulicLiftController)]
-	public IEnumerator EnsurePlayerIsCrushedByHorizontalExtension()
-	{
-		GameObject gameGameObject = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Prefabs/Game"));
-    	//var game = gameGameObject.GetComponent<Game>();
+	// [UnityTest]//, Category(TestCategoryConstants.Controllers.HydraulicLiftController)]
+	// public IEnumerator EnsurePlayerIsCrushedByHorizontalExtension()
+	// {
+	// 	GameObject gameGameObject = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Prefabs/Game"));
+    // 	//var game = gameGameObject.GetComponent<Game>();
 
 
-		yield return null;
+	// 	yield return null;
 
-		// SceneManager.LoadScene("SampleScene");
-		// yield return null;
+	// 	// SceneManager.LoadScene("SampleScene");
+	// 	// yield return null;
 
-		// var sceneCtrl = GameObject.FindObjectOfType<Pipe>();
+	// 	// var sceneCtrl = GameObject.FindObjectOfType<Pipe>();
 
-		// GlobalStateDirector.Instance.SetTimeScale(3);
+	// 	// GlobalStateDirector.Instance.SetTimeScale(3);
 
-		// //Move the player over the simple lift.
-		// SubscriptionDirector.Instance.Publish(Code.Common.Enums.SubscriptionType.RepositionPlayer, new RepositionPlayerSubscriptionPayload()
-		// {
-		// 	Position = sceneCtrl.SimpleHorizontalLift.StaticFloorCollider.transform.position + 2 * sceneCtrl.SimpleHorizontalLift.transform.up
-		// });
+	// 	// //Move the player over the simple lift.
+	// 	// SubscriptionDirector.Instance.Publish(Code.Common.Enums.SubscriptionType.RepositionPlayer, new RepositionPlayerSubscriptionPayload()
+	// 	// {
+	// 	// 	Position = sceneCtrl.SimpleHorizontalLift.StaticFloorCollider.transform.position + 2 * sceneCtrl.SimpleHorizontalLift.transform.up
+	// 	// });
 
-		// //Wait for the player to land in place.
-		// yield return new WaitForSecondsRealtime(1);
+	// 	// //Wait for the player to land in place.
+	// 	// yield return new WaitForSecondsRealtime(1);
 
-		// Assert.False(PlayerIsDead());
+	// 	// Assert.False(PlayerIsDead());
 
-		// //Move the lift up, and make sure the player goes up.
-		// sceneCtrl.SimpleHorizontalLift.SetPlatformExtensionLength(5f);
-		// yield return new WaitUntilLimit(3, () => PlayerIsDead());
-		// Assert.True(PlayerIsDead());
+	// 	// //Move the lift up, and make sure the player goes up.
+	// 	// sceneCtrl.SimpleHorizontalLift.SetPlatformExtensionLength(5f);
+	// 	// yield return new WaitUntilLimit(3, () => PlayerIsDead());
+	// 	// Assert.True(PlayerIsDead());
 
-	}
+	// }
 
 }
 

@@ -251,8 +251,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1356c73882fc48af87470715c90b55f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pipe: {fileID: 7277575032314013017, guid: 65322daf32f7645e2828ddb5ff2ce85c, type: 3}
-  spawnRate: 2
+  _pipe: {fileID: 7277575032314013017, guid: 65322daf32f7645e2828ddb5ff2ce85c, type: 3}
+  heightOffset: 10
 --- !u!1 &1731963246
 GameObject:
   m_ObjectHideFlags: 0

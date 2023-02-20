@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlappyBird
 {
-	public class PipeMoveScript : MonoBehaviour
+	public class PipeMove : MonoBehaviour
 	{
 		public float moveSpeed;
 
