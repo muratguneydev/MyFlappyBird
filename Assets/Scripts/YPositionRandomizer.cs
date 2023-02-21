@@ -13,8 +13,9 @@ namespace FlappyBird
 
 		public float Get(float currentY)
 		{
-			var lowestPoint = currentY - _offset;
-			var highestPoint = currentY + _offset;
+			//Debug.Log($"Current Y:{currentY}");
+			var lowestPoint = currentY - 3 - _offset;
+			var highestPoint = currentY + 3 + _offset;
 			var randomY = Random.Range(lowestPoint, highestPoint);
 			return randomY;
 		}

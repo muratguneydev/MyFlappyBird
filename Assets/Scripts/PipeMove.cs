@@ -4,7 +4,8 @@ namespace FlappyBird
 {
 	public class PipeMove : MonoBehaviour
 	{
-		public float moveSpeed;
+		[SerializeField] private float moveSpeed;
+		private const float DeadZoneX = -23;
 
 		// Start is called before the first frame update
 		void Start()
@@ -16,6 +17,7 @@ namespace FlappyBird
 		void Update()
 		{
 			transform.position = transform.position + (Vector3.left * moveSpeed) * Time.deltaTime;
+			new Destroyer(gameObject, DeadZoneX).DestroyIfInDeadZone();
 		}
 	}
 }

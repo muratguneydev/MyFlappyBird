@@ -5,14 +5,14 @@ namespace FlappyBird
 	public class PipeSpawner : MonoBehaviour
 	{
 		[SerializeField] private GameObject _pipe;
-		public float heightOffset = 10;
+		[SerializeField] private float heightOffset = 10;
 		private GameTimer _timer;
 		private YPositionRandomizer _yPositionRandomizer;
 
 		// Start is called before the first frame update
 		void Start()
 		{
-			_timer = new GameTimer(2, SpawnPipe);
+			_timer = new GameTimer(4, SpawnPipe);
 			_yPositionRandomizer = new YPositionRandomizer(heightOffset);
 			SpawnPipe();
 		}

@@ -11,3 +11,4 @@ Unit testing:
 https://www.youtube.com/watch?v=pr5FBtu5SvQ
 https://www.youtube.com/watch?v=arzREy5zLVU
 https://blog.unity.com/technology/testing-test-driven-development-with-the-unity-test-runner
+https://www.dima.to/blog/how-to-play-mode-unit-test-a-prefab-in-unity/
