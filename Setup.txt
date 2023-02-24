@@ -7,6 +7,10 @@ Settings
 	-> Omnisharp: Use Modern Net ->uncheck
 	-> Omnisharp: Mono Path -> /Library/Frameworks/Mono.framework/Versions/Current
 
+TextMesh Pro:
+Import TextMesh Pro when the message box appears.
+Add the reference Unity.TextMeshPro on the Inspector to the 'Scripts' assembly definition.
+
 Unit testing:
 https://www.youtube.com/watch?v=pr5FBtu5SvQ
 https://www.youtube.com/watch?v=arzREy5zLVU
