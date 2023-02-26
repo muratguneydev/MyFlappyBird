@@ -10,8 +10,8 @@ public class JumperTests
 		var rigidBody = GetRigidBody();
 		var originalVelocity = rigidBody.velocity;
 
-		var jumper = new Jumper(rigidBody);
-		jumper.Move();
+		var jumper = new Jumper();
+		jumper.Move(rigidBody);
 		Assert.AreEqual(rigidBody.velocity, Vector2.up * 10);
 	}
 

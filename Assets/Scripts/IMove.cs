@@ -1,7 +1,9 @@
+using UnityEngine;
+
 namespace FlappyBird
 {
 	public interface IMove
 	{
-		void Move();
+		void Move(Rigidbody2D rigidbody);
 	}
 }
