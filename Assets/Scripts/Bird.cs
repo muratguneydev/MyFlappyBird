@@ -1,30 +1,24 @@
-using SimpleDependencyInjection;
 using UnityEngine;
+using Zenject;
 
 namespace FlappyBird
 {
 	public class Bird : MonoBehaviour
 	{
-		[SerializeField] private Rigidbody2D myRigidBody;
-		[InjectField] private Jumper _jumper;
+		private Jumper _jumper;
+		private Rigidbody2D _rigidBody;
 
-		// private void Awake()
-		// {
-		// 	Debug.Log("Bird awake...");
+		[Inject]
+        public void Construct(Jumper jumper)
+        {
+            _jumper = jumper;
+			_rigidBody = GetComponent<Rigidbody2D>();
+        }
 
-		// }
-
-		// Start is called before the first frame update
-		void Start()
-		{
-			//_jumper = new Jumper();
-		}
-
-		// Update is called once per frame
 		void Update()
 		{
 			if (Input.GetKeyDown(KeyCode.Space))
-				_jumper.Move(myRigidBody);
+				_jumper.Move(_rigidBody);
 		}
 	}
 }

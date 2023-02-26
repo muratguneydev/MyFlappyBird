@@ -16,3 +16,12 @@ https://www.youtube.com/watch?v=pr5FBtu5SvQ
 https://www.youtube.com/watch?v=arzREy5zLVU
 https://blog.unity.com/technology/testing-test-driven-development-with-the-unity-test-runner
 https://www.dima.to/blog/how-to-play-mode-unit-test-a-prefab-in-unity/
+
+Dependency Injection: Zenject - https://github.com/modesttree/Zenject#introduction-to-zenject-api
+Assest -> Import package -> Import Custom Package -> Extenject.unitypackage
+Create new directory DependencyInjection under Scrips
+Create an assembly definition in this folder called DependencyInjection
+Add a reference to zenject to this assembly definition
+Right click -> Create -> Zenject -> Scriptable Object Installer
+
+https://www.youtube.com/watch?v=e0KWsizPYAw

@@ -11,7 +11,7 @@ namespace FlappyBird
 			this.moveSpeed = moveSpeed;
 		}
 
-		public Vector3 Move(Vector3 currentPosition, float deltaTime)
+		public virtual Vector3 Move(Vector3 currentPosition, float deltaTime)
 		{
 			return currentPosition + (Vector3.left * moveSpeed) * deltaTime;
 		}
