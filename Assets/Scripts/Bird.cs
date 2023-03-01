@@ -11,6 +11,8 @@ namespace FlappyBird
 		[Inject]
         public void Construct(Jumper jumper)
         {
+			Debug.Log("Constructed Bird.");
+
             _jumper = jumper;
 			_rigidBody = GetComponent<Rigidbody2D>();
         }

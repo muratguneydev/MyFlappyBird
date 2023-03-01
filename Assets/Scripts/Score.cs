@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using FlappyBird.Events;
 
 public class Score : MonoBehaviour
 {
@@ -7,7 +8,7 @@ public class Score : MonoBehaviour
 	private int _score;
 
 	[ContextMenu("Increment Score")]
-	public void Increment()
+	public void Increment(GoneThroughPipesSignal signal)
 	{
 		_score++;
 		_scoreText.text = _score.ToString();
