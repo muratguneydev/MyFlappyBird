@@ -3,7 +3,7 @@ using Zenject;
 
 namespace FlappyBird
 {
-	public class PipeMove : MonoBehaviour
+	public class Pipe : MonoBehaviour
 	{
 		private const float DeadZoneX = -23;
 
@@ -30,7 +30,7 @@ namespace FlappyBird
 			transform.position = _leftMover.Move(transform.position, Time.deltaTime);
 		}
 
-		public class Factory : PlaceholderFactory<PipeMove>
+		public class Factory : PlaceholderFactory<Pipe>
         {
         }
 	}

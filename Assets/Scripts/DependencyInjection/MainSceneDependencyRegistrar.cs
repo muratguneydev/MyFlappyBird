@@ -15,7 +15,7 @@ public class MainSceneDependencyRegistrar : MonoInstaller
 
 
 		Container.BindInterfacesAndSelfTo<PipeSpawner>().AsSingle();
-		Container.BindFactory<PipeMove, PipeMove.Factory>()
+		Container.BindFactory<Pipe, Pipe.Factory>()
 				// This means that any time Asteroid.Factory.Create is called, it will instantiate
 				// this prefab and then search it for the Asteroid component
 				.FromComponentInNewPrefab(_settings.PipePrefab)

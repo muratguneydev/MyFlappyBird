@@ -9,10 +9,10 @@ namespace FlappyBird
 		[SerializeField] private float heightOffset = 10;
 		private GameTimer _timer;
 		private YPositionRandomizer _yPositionRandomizer;
-		private PipeMove.Factory _factory;
+		private Pipe.Factory _factory;
 
 		[Inject]
-        public void Construct(PipeMove.Factory factory)
+        public void Construct(Pipe.Factory factory)
         {
 			Debug.Log("Constructed Spawner.");
 
