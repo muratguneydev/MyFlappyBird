@@ -22,6 +22,14 @@ Assest -> Import package -> Import Custom Package -> Extenject.unitypackage
 Create new directory DependencyInjection under Scrips
 Create an assembly definition in this folder called DependencyInjection
 Add a reference to zenject to this assembly definition
-Right click -> Create -> Zenject -> Scriptable Object Installer
+
 
 https://www.youtube.com/watch?v=e0KWsizPYAw
+
+
+Settings installer:
+1. Create a mono installer (MainSceneDependencyRegistrar : MonoInstaller) using Create -> Zenject -> ..
+2. Create a ScriptableObjectInstaller (settings installer) (Right click -> Create -> Zenject -> Scriptable Object Installer)
+3. Right click -> Create -> Installers -> Settings Installer (crated in step 2)
+4. Create a Scene Context -> right click -> zenject -> Scene Context
+5. Click + and drag mono and scriptable installers

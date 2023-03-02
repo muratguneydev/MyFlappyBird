@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 namespace FlappyBird
 {
@@ -28,5 +29,9 @@ namespace FlappyBird
 		{
 			transform.position = _leftMover.Move(transform.position, Time.deltaTime);
 		}
+
+		public class Factory : PlaceholderFactory<PipeMove>
+        {
+        }
 	}
 }
