@@ -1,6 +1,5 @@
 using System;
 using FlappyBird;
-using FlappyBird.Events;
 using UnityEngine;
 using Zenject;
 
@@ -9,12 +8,10 @@ public class MainSceneDependencyRegistrar : MonoInstaller
 	[Inject]
 	Settings _settings = null;
 
+	//https://github.com/modesttree/Zenject/blob/master/Documentation/CheatSheet.md
 	public override void InstallBindings()
 	{
-		Container.Bind<Jumper>().AsSingle().NonLazy();
-
-
-		Container.BindInterfacesAndSelfTo<PipeSpawner>().AsSingle();
+		Container.Install<CoreInstaller>();
 		Container.BindFactory<Pipe, Pipe.Factory>()
 				// This means that any time Asteroid.Factory.Create is called, it will instantiate
 				// this prefab and then search it for the Asteroid component
@@ -24,20 +21,15 @@ public class MainSceneDependencyRegistrar : MonoInstaller
 				// GameObjectGroup's are just game objects used for organization
 				// This is nice so that it doesn't clutter up our scene hierarchy
 				.UnderTransformGroup("Pipes");
-
-
-		SignalBusInstaller.Install(Container);
-
-		Container.DeclareSignal<GoneThroughPipesSignal>();
-
-		// Container.BindSignal<GoneThroughPipesSignal>()
-		// 	.ToMethod<Score>(x => x.Increment).FromResolve();
-
 	}
 
 	[Serializable]
 	public class Settings
 	{
+		public Settings(GameObject pipe)
+		{
+			PipePrefab = pipe;
+		}
 		public GameObject PipePrefab;
 
 	}

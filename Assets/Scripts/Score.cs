@@ -15,6 +15,7 @@ public class Score : MonoBehaviour
 		Debug.Log("Constructed Score.");
 		//https://github.com/modesttree/Zenject/blob/master/Documentation/Signals.md
 		_signalBus = signalBus;
+		//Note: We don't/can't subscribe as part of DI because the event is fired from a prefab.
 		_signalBus.Subscribe<GoneThroughPipesSignal>(Increment);
 	}
 
@@ -25,8 +26,7 @@ public class Score : MonoBehaviour
 		_signalBus.Unsubscribe<GoneThroughPipesSignal>(Increment);
 	}
 
-	//[ContextMenu("Increment Score")]
-	public void Increment(GoneThroughPipesSignal signal)
+	private void Increment(GoneThroughPipesSignal signal)
 	{
 		_scorePoints++;
 		_scoreText.text = _scorePoints.ToString();

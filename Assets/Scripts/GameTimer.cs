@@ -6,7 +6,7 @@ namespace FlappyBird
 	{
 		private readonly float _triggerCounter;
 		private readonly Action _onElapsed;
-		private float timer = 0;
+		private float timer;
 
 		public GameTimer(float triggerCounter, Action onElapsed)
 		{
