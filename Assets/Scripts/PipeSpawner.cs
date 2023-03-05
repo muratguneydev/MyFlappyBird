@@ -6,6 +6,7 @@ namespace FlappyBird
 	public class PipeSpawner : MonoBehaviour
 	{
 		[SerializeField] private float heightOffset = 10;
+		[SerializeField] private float spawnFrequencySeconds = 4;
 		private GameTimer _timer;
 		private YPositionRandomizer _yPositionRandomizer;
 		private Pipe.Factory _factory;
@@ -18,7 +19,7 @@ namespace FlappyBird
 
 		void Start()
 		{
-			_timer = new GameTimer(4, SpawnNext);
+			_timer = new GameTimer(spawnFrequencySeconds, SpawnNext);
 			_yPositionRandomizer = new YPositionRandomizer(heightOffset);
 			SpawnNext();
 		}

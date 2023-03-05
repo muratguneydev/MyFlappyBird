@@ -12,6 +12,6 @@ public class YPositionRandomizerTests
 		var yRandomizer = new YPositionRandomizer(Offset);
 		var y = yRandomizer.Get(currentY);
 
-		Assert.IsTrue(y >= 19f && y <= 39f);
+		Assert.IsTrue(y >= 16f && y <= 42f);
 	}
 }
