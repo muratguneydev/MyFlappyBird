@@ -2,15 +2,15 @@ using FlappyBird;
 using UnityEngine;
 using Zenject;
 
-public class PipeInstaller : Installer<GameObject, float, PipeInstaller>
+public class PipeInstaller : Installer<PipeSettings, PipeSpawnerSettings, PipeInstaller>
 {
-	private readonly GameObject _pipePrefab;
-	private readonly float _deadZoneX;
+	private readonly PipeSettings _pipeSettings;
+	private readonly PipeSpawnerSettings _pipeSpawnerSettings;
 
-	public PipeInstaller(GameObject pipePrefab, float deadZoneX)
+	public PipeInstaller(PipeSettings pipeSettings, PipeSpawnerSettings pipeSpawnerSettings)
 	{
-		_pipePrefab = pipePrefab;
-		_deadZoneX = deadZoneX;
+		_pipeSettings = pipeSettings;
+		_pipeSpawnerSettings = pipeSpawnerSettings;
 	}
 	public override void InstallBindings()
 	{
@@ -18,18 +18,19 @@ public class PipeInstaller : Installer<GameObject, float, PipeInstaller>
 		Container.Bind<Destroyer>()
 			//.FromInstance(new Destroyer(-23))
 			.AsSingle();
-		Container.BindInstance(_deadZoneX).WhenInjectedInto<Destroyer>();
+		Container.BindInstance(_pipeSettings.PipeDeadZoneX).WhenInjectedInto<Destroyer>();
 
 		Container.BindFactory<Pipe, Pipe.Factory>()
 				// This means that any time Pipe.Factory.Create is called, it will instantiate
 				// this prefab and then search it for the Pipe component
-				.FromComponentInNewPrefab(_pipePrefab)
+				.FromComponentInNewPrefab(_pipeSettings.PipePrefab)
 				// We can also tell Zenject what to name the new gameobject here
 				.WithGameObjectName("Pipe")
 				// GameObjectGroup's are just game objects used for organization
 				// This is nice so that it doesn't clutter up our scene hierarchy
 				.UnderTransformGroup("Pipes");
 		Container.BindInterfacesAndSelfTo<PipeSpawner>().AsSingle();
+		Container.BindInterfacesAndSelfTo<PipeSpawner2>().AsSingle();
 		
 	}
 }

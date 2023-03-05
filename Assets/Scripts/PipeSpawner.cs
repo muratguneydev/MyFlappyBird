@@ -19,14 +19,14 @@ namespace FlappyBird
 
 		void Start()
 		{
-			_timer = new GameTimer(spawnFrequencySeconds, SpawnNext);
-			_yPositionRandomizer = new YPositionRandomizer(heightOffset);
-			SpawnNext();
+			// _timer = new GameTimer(spawnFrequencySeconds, SpawnNext);
+			// _yPositionRandomizer = new YPositionRandomizer(heightOffset);
+			// SpawnNext();
 		}
 
 		void Update()
 		{
-			_timer.Tick(Time.deltaTime);
+			//_timer.Tick(Time.deltaTime);
 		}
 
 		private void SpawnNext()

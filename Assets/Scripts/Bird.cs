@@ -3,6 +3,7 @@ using Zenject;
 
 namespace FlappyBird
 {
+	//TODO: Continue with 36:00 adding a layer to check if collusion is with Bird.
 	public class Bird : MonoBehaviour
 	{
 		private Jumper _jumper;
