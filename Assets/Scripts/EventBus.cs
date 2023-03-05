@@ -20,6 +20,7 @@ namespace FlappyBird
 
 		public void Subscribe<TEvent>(Action<TEvent> callback)
 		{
+			//Usage: _eventBus.Subscribe<GoneThroughPipesSignal>(Increment);
 			_signalBus.Subscribe(callback);
 		}
 

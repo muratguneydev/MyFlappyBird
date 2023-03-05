@@ -1,5 +1,4 @@
 using FlappyBird;
-using UnityEngine;
 using Zenject;
 
 public class PipeInstaller : Installer<PipeSettings, PipeSpawnerSettings, PipeInstaller>

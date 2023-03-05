@@ -11,7 +11,6 @@ namespace FlappyBird
 		[Inject]
         public void Construct(IEventBus eventBus)
         {
-			Debug.Log("Constructed PipeMiddle.");
             _eventBus = eventBus;
         }
 
