@@ -3,11 +3,8 @@ using Zenject;
 
 public class MainSceneDependencyRegistrar : MonoInstaller
 {
-	[Inject]
-	PipeSettings _pipeSettings;
-
-	[Inject]
-	PipeSpawnerSettings _pipeSpawnerSettings;
+	[Inject] PipeSettings _pipeSettings;
+	[Inject] PipeSpawnerSettings _pipeSpawnerSettings;
 
 	//https://github.com/modesttree/Zenject/blob/master/Documentation/CheatSheet.md
 	public override void InstallBindings()

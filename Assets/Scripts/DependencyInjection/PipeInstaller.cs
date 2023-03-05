@@ -30,7 +30,6 @@ public class PipeInstaller : Installer<PipeSettings, PipeSpawnerSettings, PipeIn
 				// This is nice so that it doesn't clutter up our scene hierarchy
 				.UnderTransformGroup("Pipes");
 		Container.BindInterfacesAndSelfTo<PipeSpawner>().AsSingle();
-		Container.BindInterfacesAndSelfTo<PipeSpawner2>().AsSingle();
 		
 	}
 }

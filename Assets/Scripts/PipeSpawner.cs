@@ -3,37 +3,37 @@ using Zenject;
 
 namespace FlappyBird
 {
-	public class PipeSpawner : MonoBehaviour
+	//To avoid dependency on the play mode and creating MonoBehavour objects, we use Zenject's interfaces. Tick() is the same as MonoBevour's Update and Initialize as Start.
+	public class PipeSpawner : ITickable, IInitializable
 	{
-		[SerializeField] private float heightOffset = 10;
-		[SerializeField] private float spawnFrequencySeconds = 4;
 		private GameTimer _timer;
 		private YPositionRandomizer _yPositionRandomizer;
-		private Pipe.Factory _factory;
+		private Pipe.Factory _pipeFactory;
+		private readonly PipeSpawnerSettings _pipeSpawnerSettings;
 
-		[Inject]
-        public void Construct(Pipe.Factory factory)
+		public PipeSpawner(Pipe.Factory pipeFactory, PipeSpawnerSettings pipeSpawnerSettings)
         {
-            _factory = factory;
-        }
-
-		void Start()
-		{
-			// _timer = new GameTimer(spawnFrequencySeconds, SpawnNext);
-			// _yPositionRandomizer = new YPositionRandomizer(heightOffset);
-			// SpawnNext();
+            _pipeFactory = pipeFactory;
+			_pipeSpawnerSettings = pipeSpawnerSettings;
 		}
 
-		void Update()
+		public void Initialize()
 		{
-			//_timer.Tick(Time.deltaTime);
+			_timer = new GameTimer(_pipeSpawnerSettings.SpawnFrequencySeconds, SpawnNext);
+			_yPositionRandomizer = new YPositionRandomizer(_pipeSpawnerSettings.HeightOffset);
+			SpawnNext();
+		}
+
+		public void Tick()
+		{
+			_timer.Tick(Time.deltaTime);
 		}
 
 		private void SpawnNext()
 		{
-			var pipe = _factory.Create();
-			var randomY = _yPositionRandomizer.Get(transform.position.y);
-			pipe.transform.position = new Vector3(transform.position.x, randomY, 0);
+			var pipe = _pipeFactory.Create();
+			var randomY = _yPositionRandomizer.Get(_pipeSpawnerSettings.StartPositionY);
+			pipe.transform.position = new Vector3(_pipeSpawnerSettings.StartPositionX, randomY, 0);
 		}
 	}
 }
