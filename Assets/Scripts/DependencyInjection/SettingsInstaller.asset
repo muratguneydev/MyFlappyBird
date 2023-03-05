@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8a6a748b8a0b44b6bd01f1a332e74fd, type: 3}
   m_Name: SettingsInstaller
   m_EditorClassIdentifier: 
-  GameInstaller:
+  PipeSettings:
     PipePrefab: {fileID: 7277575032314013017, guid: 65322daf32f7645e2828ddb5ff2ce85c, type: 3}
     PipeDeadZoneX: -23
   PipeSpawnerSettings:
@@ -20,3 +20,5 @@ MonoBehaviour:
     SpawnFrequencySeconds: 4
     StartPositionX: 11.14
     StartPositionY: 0
+  BirdSettings:
+    JumpUpVelocity: 10

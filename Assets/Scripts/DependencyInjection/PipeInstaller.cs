@@ -1,4 +1,5 @@
 using FlappyBird;
+using FlappyBird.Events;
 using Zenject;
 
 public class PipeInstaller : Installer<PipeSettings, PipeSpawnerSettings, PipeInstaller>
@@ -13,6 +14,12 @@ public class PipeInstaller : Installer<PipeSettings, PipeSpawnerSettings, PipeIn
 	}
 	public override void InstallBindings()
 	{
+		Container.DeclareSignal<GoneThroughPipesSignal>();
+		Container.DeclareSignal<ObjectMovedSignal>();
+		Container.BindSignal<ObjectMovedSignal>()
+            .ToMethod<Destroyer>(x => x.OnObjectMoved)
+			.FromResolve();
+
 		Container.Bind<ObjectDestroyer>().AsSingle();
 		Container.Bind<Destroyer>()
 			//.FromInstance(new Destroyer(-23))
@@ -29,6 +36,7 @@ public class PipeInstaller : Installer<PipeSettings, PipeSpawnerSettings, PipeIn
 				// This is nice so that it doesn't clutter up our scene hierarchy
 				.UnderTransformGroup("Pipes");
 		Container.BindInterfacesAndSelfTo<PipeSpawner>().AsSingle();
+		
 		
 	}
 }

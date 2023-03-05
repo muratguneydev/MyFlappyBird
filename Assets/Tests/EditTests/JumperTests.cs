@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class JumperTests
 {
+	private const int JumpUpVelocity = 10;
+
 	[Test]
 	public void ShouldJump()
 	{
 		var rigidBody = GetRigidBody();
 		var originalVelocity = rigidBody.velocity;
 
-		var jumper = new Jumper();
+		var jumper = new Jumper(JumpUpVelocity);
 		jumper.Move(rigidBody);
-		Assert.AreEqual(rigidBody.velocity, Vector2.up * 10);
+		Assert.AreEqual(Vector2.up * JumpUpVelocity, rigidBody.velocity);
 	}
 
 	private static Rigidbody2D GetRigidBody()

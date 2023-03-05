@@ -29,7 +29,6 @@ public class DestroyerTests
 		eventBus.Fire(new ObjectMovedSignal(objectToBeDestroyed));
 
 		unsubscribeDestroyer();
-		//Assert.IsFalse(objectToBeDestroyed.activeInHierarchy, "Game object wasn't destroyed.");
 		Assert.AreEqual(shouldBeDestroyed, !objectToBeDestroyed.activeInHierarchy, failureMessage);
 	}
 
