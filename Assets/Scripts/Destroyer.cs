@@ -1,30 +1,20 @@
-using System;
 using FlappyBird.Events;
 using UnityEngine;
-using Zenject;
 
 namespace FlappyBird
 {
-	public class Destroyer //: IInitializable, IDisposable
+	public class Destroyer
 	{
 		private readonly float _deadZoneX;
-		private readonly SignalBus _signalBus;
+		private readonly IEventBus _eventBus;
+		private readonly ObjectDestroyer _objectDestroyer;
 
-		public Destroyer(float deadZoneX, SignalBus signalBus)
+		public Destroyer(float deadZoneX, IEventBus eventBus, ObjectDestroyer objectDestroyer)
 		{
 			_deadZoneX = deadZoneX;
-			_signalBus = signalBus;
+			_eventBus = eventBus;
+			_objectDestroyer = objectDestroyer;
 		}
-
-		// public void Dispose()
-		// {
-		// 	_signalBus.Unsubscribe<ObjectMovedSignal>(OnObjectMoved);
-		// }
-
-		// public void Initialize()
-		// {
-		// 	_signalBus.Subscribe<ObjectMovedSignal>(OnObjectMoved);
-		// }
 
 		public void OnObjectMoved(ObjectMovedSignal objectMovedSignal)
 		{
@@ -37,8 +27,16 @@ namespace FlappyBird
 				return;
 
 			gameObject.SetActive(false);
-			UnityEngine.Object.Destroy(gameObject);
+			_objectDestroyer.Destroy(gameObject);
 			Debug.Log("Destroyed.");
+		}
+	}
+
+	public class ObjectDestroyer
+	{
+		public virtual void Destroy(GameObject gameObject)
+		{
+			UnityEngine.Object.Destroy(gameObject);
 		}
 	}
 }

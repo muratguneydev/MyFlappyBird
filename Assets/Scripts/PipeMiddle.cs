@@ -6,18 +6,18 @@ namespace FlappyBird
 {
 	public class PipeMiddle : MonoBehaviour
 	{
-		private SignalBus _signalBus;
+		private IEventBus _eventBus;
 
 		[Inject]
-        public void Construct(SignalBus signalBus)
+        public void Construct(IEventBus eventBus)
         {
 			Debug.Log("Constructed PipeMiddle.");
-            _signalBus = signalBus;
+            _eventBus = eventBus;
         }
 
 		private void OnTriggerEnter2D(Collider2D collision)
 		{
-			_signalBus.Fire(new GoneThroughPipesSignal());
+			_eventBus.Fire(new GoneThroughPipesSignal());
 		}
 	}
 }

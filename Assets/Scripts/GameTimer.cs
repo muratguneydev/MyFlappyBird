@@ -4,26 +4,34 @@ namespace FlappyBird
 {
 	public class GameTimer
 	{
-		private readonly float _triggerCounter;
+		private readonly float _requiredElapsedSecondsForTrigger;
 		private readonly Action _onElapsed;
-		private float timer;
+		private float _currentElapsedSeconds;
 
-		public GameTimer(float triggerCounter, Action onElapsed)
+		public GameTimer(float requiredElapsedSecondsForTrigger, Action onElapsed)
 		{
-			_triggerCounter = triggerCounter;
+			_requiredElapsedSecondsForTrigger = requiredElapsedSecondsForTrigger;
 			_onElapsed = onElapsed;
 		}
 
-		public void Tick(float deltaTime)
+		public void Tick(float deltaTimeInSeconds)
 		{
-			timer += deltaTime;
+			UpdateCurrentElapsedSeconds(deltaTimeInSeconds);
+			if (_currentElapsedSeconds < _requiredElapsedSecondsForTrigger)
+				return;
+			
+			_onElapsed();
+			ResetCurrentElapsedSeconds();
+		}
 
-			if (timer >= _triggerCounter)
-			{
-				_onElapsed();
-				timer = 0;
-			}
-			//Debug.Log(timer);
+		private void ResetCurrentElapsedSeconds()
+		{
+			_currentElapsedSeconds = 0;
+		}
+
+		private void UpdateCurrentElapsedSeconds(float deltaTimeInSeconds)
+		{
+			_currentElapsedSeconds += deltaTimeInSeconds;
 		}
 	}
 }

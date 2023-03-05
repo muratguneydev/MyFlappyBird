@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameInstaller:
     PipePrefab: {fileID: 7277575032314013017, guid: 65322daf32f7645e2828ddb5ff2ce85c, type: 3}
+    PipeDeadZoneX: -23

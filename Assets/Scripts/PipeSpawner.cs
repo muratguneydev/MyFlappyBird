@@ -5,7 +5,6 @@ namespace FlappyBird
 {
 	public class PipeSpawner : MonoBehaviour
 	{
-		[SerializeField] private GameObject _pipe;
 		[SerializeField] private float heightOffset = 10;
 		private GameTimer _timer;
 		private YPositionRandomizer _yPositionRandomizer;
@@ -14,12 +13,9 @@ namespace FlappyBird
 		[Inject]
         public void Construct(Pipe.Factory factory)
         {
-			Debug.Log("Constructed Spawner.");
-
             _factory = factory;
         }
 
-		// Start is called before the first frame update
 		void Start()
 		{
 			_timer = new GameTimer(4, SpawnNext);
@@ -27,7 +23,6 @@ namespace FlappyBird
 			SpawnNext();
 		}
 
-		// Update is called once per frame
 		void Update()
 		{
 			_timer.Tick(Time.deltaTime);

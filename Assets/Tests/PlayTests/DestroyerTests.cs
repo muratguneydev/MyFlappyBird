@@ -2,64 +2,53 @@ using System;
 using FlappyBird;
 using FlappyBird.Events;
 using NUnit.Framework;
+using UnityEditor;
 using UnityEngine;
 using Zenject;
 
-public class DestroyerTests //: ZenjectUnitTestFixture
+public class DestroyerTests
 {
-
-	// [Inject]
-	// public void Construct(SignalBus signalBus)
-	// {
-	// 	Debug.Log("Constructed PipeMiddle.");
-	// 	_signalBus = signalBus;
-	// }
-
 	//https://github.com/modesttree/Zenject/blob/master/Documentation/WritingAutomatedTests.md
-	[Test]
-	public void ShouldDestroyIfInDeadZone()
+	[TestCase(-23f, -40f, true, "Game object should be destroyed.")]
+	[TestCase(-23f, -10f, false, "Game object should not be destroyed.")]
+	public void ShouldDestroyIfInDeadZone(float deadZoneX, float objectCurrentX, bool shouldBeDestroyed, string failureMessage)
 	{
-
+		var pipePrefab = GetPipePrefab();
 		var container = new DiContainer(StaticContext.Container);
 		container.Install<CoreInstaller>();
+		PipeInstaller.Install(container, pipePrefab, deadZoneX);
 
-		var signalBus = container.Resolve<SignalBus>();
-		Assert.That(signalBus is not null);
+
+		var eventBus = container.Resolve<IEventBus>();
+		Assert.That(eventBus is not null);
 
 		var unsubscribeDestroyer = SubscribeDestroyerAsOriginalRegistrationDoesntWorkInTestMode(container);
 
 		var objectToBeDestroyed = new GameObject();
-		objectToBeDestroyed = GameObject.Instantiate(objectToBeDestroyed, new Vector3(-40, 0, 0), Quaternion.identity);
-		signalBus.Fire(new ObjectMovedSignal(objectToBeDestroyed));
+		objectToBeDestroyed = GameObject.Instantiate(objectToBeDestroyed, new Vector3(objectCurrentX, 0, 0), Quaternion.identity);
+		eventBus.Fire(new ObjectMovedSignal(objectToBeDestroyed));
 
 		unsubscribeDestroyer();
-		Assert.IsFalse(objectToBeDestroyed.activeInHierarchy, "Game object wasn't destroyed.");
+		//Assert.IsFalse(objectToBeDestroyed.activeInHierarchy, "Game object wasn't destroyed.");
+		Assert.AreEqual(shouldBeDestroyed, !objectToBeDestroyed.activeInHierarchy, failureMessage);
 	}
 
-	// [Test]
-	// public void ShouldNotDestroyIfOutsideOfDeadZone()
-	// {
-	// 	// Create a new root game object.
-	// 	var root = new GameObject();
-	// 	root = GameObject.Instantiate(root, new Vector3(-10, 0, 0), Quaternion.identity);
-	// 	var destroyer = new Destroyer(root, -20);
-	// 	destroyer.DestroyIfInDeadZone();
-	// 	Assert.IsTrue(root.activeInHierarchy);
-	// }
+	private static GameObject GetPipePrefab()
+	{
+		return AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Pipe.prefab");
+		//var prefabInstance = Object.Instantiate(prefab, new Vector3(0, 0, 0), Quaternion.identity);
+	}
 
 	private static Action SubscribeDestroyerAsOriginalRegistrationDoesntWorkInTestMode(DiContainer container)
 	{
 		var destroyer = container.Resolve<Destroyer>();
 		Assert.That(destroyer is not null);
-		var signalBus = container.Resolve<SignalBus>();
-		signalBus.Subscribe<ObjectMovedSignal>(destroyer.OnObjectMoved);
+		var eventBus = container.Resolve<IEventBus>();
+		eventBus.Subscribe<ObjectMovedSignal>(destroyer.OnObjectMoved);
 
-		return () => signalBus.Unsubscribe<ObjectMovedSignal>(destroyer.OnObjectMoved);
+		return () => eventBus.Unsubscribe<ObjectMovedSignal>(destroyer.OnObjectMoved);
 	}
 
-	
-
-	
 
 	// [UnityTest]
 	// [Timeout(180000)] // Sets the timeout of the test in milliseconds (if the test hangs, this will ensure it closes after 3 minutes).

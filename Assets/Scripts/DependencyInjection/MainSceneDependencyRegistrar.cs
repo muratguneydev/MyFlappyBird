@@ -12,15 +12,8 @@ public class MainSceneDependencyRegistrar : MonoInstaller
 	public override void InstallBindings()
 	{
 		Container.Install<CoreInstaller>();
-		Container.BindFactory<Pipe, Pipe.Factory>()
-				// This means that any time Asteroid.Factory.Create is called, it will instantiate
-				// this prefab and then search it for the Asteroid component
-				.FromComponentInNewPrefab(_settings.PipePrefab)
-				// We can also tell Zenject what to name the new gameobject here
-				.WithGameObjectName("Pipe")
-				// GameObjectGroup's are just game objects used for organization
-				// This is nice so that it doesn't clutter up our scene hierarchy
-				.UnderTransformGroup("Pipes");
+		PipeInstaller.Install(Container, _settings.PipePrefab, _settings.PipeDeadZoneX);
+		//Container.Bind<Foo>().AsSingle().WithArguments(_value);
 	}
 
 	[Serializable]
@@ -31,6 +24,6 @@ public class MainSceneDependencyRegistrar : MonoInstaller
 			PipePrefab = pipe;
 		}
 		public GameObject PipePrefab;
-
+		public float PipeDeadZoneX;
 	}
 }
