@@ -7,7 +7,7 @@ namespace FlappyBird
 	{
 		//readonly SignalBus _signalBus;
 
-		public GameInitializer()//SignalBus signalBus)
+		public GameInitializer(RealTimeTicker pipeSpawnTicker)
 		{
 			//_signalBus = signalBus;
 		}

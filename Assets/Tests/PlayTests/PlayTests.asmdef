@@ -8,7 +8,8 @@
         "Zenject",
         "Scripts",
         "Events",
-        "Zenject-TestFramework"
+        "Zenject-TestFramework",
+        "TestFramework"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

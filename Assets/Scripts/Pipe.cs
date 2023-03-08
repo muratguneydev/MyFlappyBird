@@ -8,13 +8,11 @@ namespace FlappyBird
 	{
 		[SerializeField] private float moveSpeed;
 		private LeftMover _leftMover;
-		private Destroyer _destroyer;
 		private IEventBus _eventBus;
 
 		[Inject]
         public void Construct(IEventBus eventBus)
         {
-			Debug.Log("Constructed PipeMiddle.");
             _eventBus = eventBus;
         }
 

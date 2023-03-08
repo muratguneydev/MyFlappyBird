@@ -36,7 +36,12 @@ public class PipeInstaller : Installer<PipeSettings, PipeSpawnerSettings, PipeIn
 				// This is nice so that it doesn't clutter up our scene hierarchy
 				.UnderTransformGroup("Pipes");
 		Container.BindInterfacesAndSelfTo<PipeSpawner>().AsSingle();
+		Container.BindInterfacesAndSelfTo<YPositionRandomizer>()
+			.AsSingle()
+			.WithArguments(_pipeSpawnerSettings.HeightOffset);
 		
-		
+		Container.BindInterfacesAndSelfTo<RealTimeTicker>()
+			.AsSingle();
+		Container.BindInstance(_pipeSpawnerSettings.SpawnFrequencySeconds).WhenInjectedInto<RealTimeTicker>();
 	}
 }

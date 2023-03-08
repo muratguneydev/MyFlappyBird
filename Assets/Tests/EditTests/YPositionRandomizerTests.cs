@@ -3,7 +3,7 @@ using NUnit.Framework;
 
 public class YPositionRandomizerTests
 {
-	private const float Offset = 10f;
+	private const float Offset = 13f;
 
 	[Test]
 	public void ShouldRandomizeYPositionWithOffset()

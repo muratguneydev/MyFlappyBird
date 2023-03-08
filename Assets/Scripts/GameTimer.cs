@@ -16,6 +16,9 @@ namespace FlappyBird
 
 		public void Tick(float deltaTimeInSeconds)
 		{
+			if (_onElapsed == null)
+				return;
+
 			UpdateCurrentElapsedSeconds(deltaTimeInSeconds);
 			if (_currentElapsedSeconds < _requiredElapsedSecondsForTrigger)
 				return;

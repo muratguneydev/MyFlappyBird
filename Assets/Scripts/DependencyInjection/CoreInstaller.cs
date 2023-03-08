@@ -9,6 +9,7 @@ public class CoreInstaller : Installer
 		Container.Bind<IEventBus>().To<EventBus>().AsSingle();
 
 		Container.BindInterfacesTo<GameInitializer>().AsSingle();
+		Container.Bind<DeltaTime>().AsSingle();
 
 		Container.Bind<ScoreManager>().AsSingle();
 		Container.BindSignal<GoneThroughPipesSignal>()
