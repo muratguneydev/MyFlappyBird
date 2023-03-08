@@ -14,7 +14,6 @@ namespace FlappyBird
 		public RealTimeTicker(float requiredElapsedSecondsForTrigger, IInvokable invokable, DeltaTime deltaTime)
 		{
 			Debug.Log($"RealTimeTicker constructed with invokable of {invokable}");
-			
 			_requiredElapsedSecondsForTrigger = requiredElapsedSecondsForTrigger;
 			_invokable = invokable;
 			_deltaTime = deltaTime;

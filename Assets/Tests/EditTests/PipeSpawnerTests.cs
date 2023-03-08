@@ -1,30 +1,50 @@
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using FlappyBird;
 using NUnit.Framework;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.TestTools;
 
 //https://docs.unity3d.com/Packages/com.unity.test-framework@1.1/manual/reference-attribute-unitytest.html
-
 public class PipeSpawnerTests
 {
     [Test]
     public void ShouldSpawn()
 	{
-		var pipeSpawner = GetPipeSpawner();
-		//pipeSpawner.
+		var pipesToUse = new List<SpawnedTestPipe> { new SpawnedTestPipe(5f), new SpawnedTestPipe(7f), new SpawnedTestPipe(19f) };
+		var pipeSpawner = GetPipeSpawner(pipesToUse);
 
+		foreach (var testPipe in pipesToUse)
+		{
+			pipeSpawner.Invoke();
+			testPipe.AssertYPosition();
+		}
 	}
 
-	private static PipeSpawner GetPipeSpawner()
+	private static PipeSpawner GetPipeSpawner(IReadOnlyList<SpawnedTestPipe> pipesToUse)
 	{
-		var pipeFactory = new PipeFactoryStub();
+		var pipeFactory = new PipeFactoryStub(pipesToUse.Select(pipesToUse => pipesToUse.Pipe).ToArray());
 		var pipeSpawnerSettings = new PipeSpawnerSettings();
-		var yPositionRandomizer = new YPositionRandomizer(13);
-		var pipeSpawner = new PipeSpawner(pipeFactory, pipeSpawnerSettings, yPositionRandomizer);
-		return pipeSpawner;
+		var yPositionRandomizer = new YPositionRandomizerFake(pipesToUse.Select(pipesToUse => pipesToUse.ExpectedYPosition).ToArray());
+		return new PipeSpawner(pipeFactory, pipeSpawnerSettings, yPositionRandomizer);
+	}
+
+	private class SpawnedTestPipe
+	{
+		public SpawnedTestPipe(float expectedYPosition)
+		{
+			ExpectedYPosition = expectedYPosition;
+
+			var gameObject = new GameObject();
+			Pipe = gameObject.AddComponent<TestPipe>();
+		}
+
+		public float ExpectedYPosition { get; }
+		public TestPipe Pipe { get; }
+
+		public void AssertYPosition()
+		{
+			Assert.AreEqual(ExpectedYPosition, Pipe.transform.position.y);
+		}
 	}
 
 	// // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use

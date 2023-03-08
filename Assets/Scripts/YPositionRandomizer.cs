@@ -11,7 +11,7 @@ namespace FlappyBird
 			_offset = offset;
 		}
 
-		public float Get(float currentY)
+		public virtual float Get(float currentY)
 		{
 			var lowestPoint = currentY - _offset;
 			var highestPoint = currentY + _offset;
