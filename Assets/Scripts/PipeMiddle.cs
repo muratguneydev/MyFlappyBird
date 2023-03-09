@@ -16,7 +16,9 @@ namespace FlappyBird
 
 		private void OnTriggerEnter2D(Collider2D collision)
 		{
-			_eventBus.Fire(new GoneThroughPipesSignal());
+			//Add a layer to the bird and use that layer number here.
+			if (collision.gameObject.layer == 3)
+				_eventBus.Fire(new GoneThroughPipesSignal());
 		}
 	}
 }

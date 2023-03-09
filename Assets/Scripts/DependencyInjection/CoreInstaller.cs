@@ -10,6 +10,7 @@ public class CoreInstaller : Installer
 
 		Container.BindInterfacesTo<GameInitializer>().AsSingle();
 		Container.Bind<DeltaTime>().AsSingle();
+		Container.Bind<KeyInput>().AsSingle();
 
 		Container.Bind<ScoreManager>().AsSingle();
 		Container.BindSignal<GoneThroughPipesSignal>()

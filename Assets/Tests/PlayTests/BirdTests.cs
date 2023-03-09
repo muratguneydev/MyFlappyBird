@@ -3,9 +3,17 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 using FlappyBird;
+using UnityEngine.SceneManagement;
 
 public class BirdTests
 {
+	[OneTimeSetUp]
+	public void LoadScene()
+	{
+		SceneManager.LoadScene("MainScene");
+		
+	}
+
     // A Test behaves as an ordinary method
     [Test]
     public void BirdTestsSimplePasses()

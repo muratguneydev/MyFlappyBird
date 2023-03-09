@@ -34,3 +34,4 @@ Settings installer:
 3. Right click -> Create -> Installers -> Settings Installer (crated in step 2)
 4. Create a Scene Context -> right click -> zenject -> Scene Context
 5. Click + and drag mono and scriptable installers
+

@@ -602,7 +602,7 @@ GameObject:
   - component: {fileID: 1731963247}
   - component: {fileID: 1731963250}
   - component: {fileID: 1731963251}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bird
   m_TagString: Untagged
   m_Icon: {fileID: 0}
