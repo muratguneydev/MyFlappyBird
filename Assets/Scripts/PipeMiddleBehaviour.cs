@@ -4,7 +4,7 @@ using Zenject;
 
 namespace FlappyBird
 {
-	public class PipeMiddle : MonoBehaviour
+	public class PipeMiddleBehaviour : MonoBehaviour
 	{
 		private IEventBus _eventBus;
 

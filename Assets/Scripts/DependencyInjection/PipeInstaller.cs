@@ -26,7 +26,7 @@ public class PipeInstaller : Installer<PipeSettings, PipeSpawnerSettings, PipeIn
 			.AsSingle();
 		Container.BindInstance(_pipeSettings.PipeDeadZoneX).WhenInjectedInto<Destroyer>();
 
-		Container.BindFactory<Pipe, Pipe.Factory>()
+		Container.BindFactory<PipeBehaviour, PipeBehaviour.Factory>()
 				// This means that any time Pipe.Factory.Create is called, it will instantiate
 				// this prefab and then search it for the Pipe component
 				.FromComponentInNewPrefab(_pipeSettings.PipePrefab)

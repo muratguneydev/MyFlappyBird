@@ -6,10 +6,10 @@ namespace FlappyBird
 	public class PipeSpawner : IInitializable, IInvokable
 	{
 		private YPositionRandomizer _yPositionRandomizer;
-		private Pipe.Factory _pipeFactory;
+		private PipeBehaviour.Factory _pipeFactory;
 		private readonly PipeSpawnerSettings _pipeSpawnerSettings;
 
-		public PipeSpawner(Pipe.Factory pipeFactory, PipeSpawnerSettings pipeSpawnerSettings,
+		public PipeSpawner(PipeBehaviour.Factory pipeFactory, PipeSpawnerSettings pipeSpawnerSettings,
 			YPositionRandomizer yPositionRandomizer)
         {
             _pipeFactory = pipeFactory;

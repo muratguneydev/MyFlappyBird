@@ -3,7 +3,7 @@ using Zenject;
 
 namespace FlappyBird
 {
-	public class Bird : MonoBehaviour
+	public class BirdBehaviour : MonoBehaviour
 	{
 		private Jumper _jumper;
 		private Rigidbody2D _rigidBody;

@@ -4,7 +4,7 @@ using Zenject;
 
 namespace FlappyBird
 {
-	public class Pipe : MonoBehaviour
+	public class PipeBehaviour : MonoBehaviour
 	{
 		[SerializeField] private float moveSpeed;
 		private LeftMover _leftMover;
@@ -34,7 +34,7 @@ namespace FlappyBird
 			_eventBus.Fire(new ObjectMovedSignal(gameObject));
 		}
 
-		public class Factory : PlaceholderFactory<Pipe>
+		public class Factory : PlaceholderFactory<PipeBehaviour>
         {
         }
 	}

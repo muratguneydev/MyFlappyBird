@@ -1,6 +1,6 @@
 using FlappyBird;
 
-public class TestPipe : Pipe
+public class TestPipe : PipeBehaviour
 {
 
 }

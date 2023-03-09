@@ -1,14 +1,14 @@
 using FlappyBird;
 
-public class PipeFactoryStub : Pipe.Factory
+public class PipeFactoryStub : PipeBehaviour.Factory
 {
-	private readonly Pipe[] _pipesToReturn;
+	private readonly PipeBehaviour[] _pipesToReturn;
 	private int _currentPipeIndex;
-	public PipeFactoryStub(Pipe[] pipesToReturn)
+	public PipeFactoryStub(PipeBehaviour[] pipesToReturn)
 	{
 		_pipesToReturn = pipesToReturn;
 	}
-	public override Pipe Create()
+	public override PipeBehaviour Create()
 	{
 		return _pipesToReturn[_currentPipeIndex++];
 	}

@@ -27,7 +27,7 @@ public class BirdTests
     public IEnumerator BirdTestsWithEnumeratorPasses()
     {
         var gameObject = new GameObject();
-		var bird = gameObject.AddComponent<Bird>();
+		var bird = gameObject.AddComponent<Behaviour>();
 
 		yield return null;
     }
