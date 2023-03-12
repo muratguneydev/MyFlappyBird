@@ -3,6 +3,7 @@ using Zenject;
 
 namespace FlappyBird
 {
+	[RequireComponent(typeof(Rigidbody))]
 	public class BirdBehaviour : MonoBehaviour
 	{
 		private Jumper _jumper;
@@ -10,13 +11,12 @@ namespace FlappyBird
 		private KeyInput _keyInput;
 
 		[Inject]
-        public void Construct(Jumper jumper, KeyInput keyInput)
+        public virtual void Construct(Jumper jumper, KeyInput keyInput)
         {
-			Debug.Log("Constructed Bird.");
-
             _jumper = jumper;
 			_rigidBody = GetComponent<Rigidbody2D>();
 			_keyInput = keyInput;
+			Debug.Log(keyInput);
         }
 
 		void Update()

@@ -2,7 +2,6 @@ using System;
 using FlappyBird;
 using FlappyBird.Events;
 using NUnit.Framework;
-using UnityEditor;
 using UnityEngine;
 using Zenject;
 
@@ -13,16 +12,15 @@ public class DestroyerTests
 	[TestCase(-23f, -10f, false, "Game object should not be destroyed.")]
 	public void ShouldDestroyIfInDeadZone(float deadZoneX, float objectCurrentX, bool shouldBeDestroyed, string failureMessage)
 	{
-		var pipePrefab = GetPipePrefab();
+		var pipePrefab = PipePrefab.Create();
 		var container = new DiContainer(StaticContext.Container);
 		container.Install<CoreInstaller>();
 		PipeInstaller.Install(container, new PipeSettings(pipePrefab, deadZoneX), new PipeSpawnerSettings());
 
-
 		var eventBus = container.Resolve<IEventBus>();
 		Assert.That(eventBus is not null);
 
-		var unsubscribeDestroyer = SubscribeDestroyerAsOriginalRegistrationDoesntWorkInTestMode(container);
+		var unsubscribeDestroyer = SubscribeDestroyerAsSignalsInOriginalRegistrationDoesntWorkInTestMode(container);
 
 		var objectToBeDestroyed = new GameObject();
 		objectToBeDestroyed = GameObject.Instantiate(objectToBeDestroyed, new Vector3(objectCurrentX, 0, 0), Quaternion.identity);
@@ -32,13 +30,7 @@ public class DestroyerTests
 		Assert.AreEqual(shouldBeDestroyed, !objectToBeDestroyed.activeInHierarchy, failureMessage);
 	}
 
-	private static GameObject GetPipePrefab()
-	{
-		return AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Pipe.prefab");
-		//var prefabInstance = Object.Instantiate(prefab, new Vector3(0, 0, 0), Quaternion.identity);
-	}
-
-	private static Action SubscribeDestroyerAsOriginalRegistrationDoesntWorkInTestMode(DiContainer container)
+	private static Action SubscribeDestroyerAsSignalsInOriginalRegistrationDoesntWorkInTestMode(DiContainer container)
 	{
 		var destroyer = container.Resolve<Destroyer>();
 		Assert.That(destroyer is not null);
