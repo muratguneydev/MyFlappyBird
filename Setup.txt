@@ -24,8 +24,8 @@ https://www.gamedeveloper.com/programming/dependency-injection-on-unity
 
 Dependency Injection: Zenject - https://github.com/modesttree/Zenject#introduction-to-zenject-api
 Cheat sheet: https://github.com/modesttree/Zenject/blob/master/Documentation/CheatSheet.md
-Assest -> Import package -> Import Custom Package -> Extenject.unitypackage
-Create new directory DependencyInjection under Scrips
+Assets -> Import package -> Import Custom Package -> Extenject.unitypackage
+Create new directory DependencyInjection under Scripts
 Create an assembly definition in this folder called DependencyInjection
 Add a reference to zenject to this assembly definition
 

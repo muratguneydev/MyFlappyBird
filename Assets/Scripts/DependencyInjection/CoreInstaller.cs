@@ -7,8 +7,14 @@ public class CoreInstaller : Installer
     {
 		SignalBusInstaller.Install(Container);
 		Container.Bind<IEventBus>().To<EventBus>().AsSingle();
+		
+		Container.DeclareSignal<GameResetSignal>();
+		Container.BindSignal<GameResetSignal>()
+            .ToMethod<GameController>(x => x.OnReset)
+			.FromResolve();
 
 		Container.BindInterfacesTo<GameInitializer>().AsSingle();
+		Container.Bind<GameController>().AsSingle();
 		Container.Bind<DeltaTime>().AsSingle();
 		Container.Bind<KeyInput>().AsSingle();
 
