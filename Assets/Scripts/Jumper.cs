@@ -14,7 +14,10 @@ namespace FlappyBird
 
 		public void Move(Rigidbody2D rigidbody)
 		{
+			//Debug.Log($"Old velocity:{rigidbody.velocity}");
 			rigidbody.velocity = Vector2.up * _jumpUpVelocity;
+			//Debug.Log($"New velocity:{rigidbody.velocity}");
+
 		}
 	}
 }

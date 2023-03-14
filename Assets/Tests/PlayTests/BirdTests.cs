@@ -3,7 +3,6 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 using FlappyBird;
-using UnityEngine.SceneManagement;
 using Zenject;
 
 public class BirdTests
@@ -28,10 +27,12 @@ public class BirdTests
 	[UnityTest]
 	public IEnumerator ShouldJumpWhenSpacebarKeyDown()
 	{
-		
+		//Arrange
+		const int BirdUpVelocity = 10;
+		const int HeightTolerance = 2;
 		var container = new DiContainer(StaticContext.Container);
 		container.Install<CoreInstaller>();
-		BirdInstaller.Install(container, new BirdSettings(10));
+		BirdInstaller.Install(container, new BirdSettings(BirdUpVelocity));
 
 		var spaceKeyInputStub = new KeyInputStub(KeyCode.Space);
 		//container.Bind<KeyInput>().FromInstance(spaceKeyInputStub).AsSingle();
@@ -39,15 +40,15 @@ public class BirdTests
 		var gameObject = new GameObject();
 		var bird = gameObject.AddComponent<BirdBehaviour>();
 		bird.Construct(container.Resolve<IEventBus>(), container.Resolve<Jumper>(), spaceKeyInputStub);
-		//var objectCurrentY = 10f;
-		//gameObject = GameObject.Instantiate(gameObject, new Vector3(0, objectCurrentY, 0), Quaternion.identity);
+		//Act
+		yield return new WaitForSeconds(1);//Let it move up around 10 units in 1 second
+		//Assert
+		CleanUp(gameObject);
+		Assert.IsTrue(gameObject.transform.position.y > BirdUpVelocity - HeightTolerance);
+	}
 
-		yield return null;
-		Debug.Log($"Bird Test new Y:{gameObject.transform.position.y}");
-		yield return null;
-		Debug.Log($"Bird Test new Y:{gameObject.transform.position.y}");
-		yield return null;
-		Debug.Log($"Bird Test new Y:{gameObject.transform.position.y}");
+	private static void CleanUp(GameObject gameObject)
+	{
 		GameObject.Destroy(gameObject);
 	}
 
@@ -66,21 +67,4 @@ public class BirdTests
 
 	// 	yield return testableBehaviour;
 	// }
-
-
-
-}
-
-public class KeyInputStub : KeyInput
-{
-	private readonly KeyCode _keyCode;
-
-	public KeyInputStub(KeyCode keyCode)
-	{
-		_keyCode = keyCode;
-	}
-	public override bool GetKeyDown(KeyCode keyCode)
-	{
-		return keyCode == _keyCode;
-	}
 }

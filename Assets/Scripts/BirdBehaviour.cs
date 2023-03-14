@@ -19,7 +19,6 @@ namespace FlappyBird
 			_jumper = jumper;
 			_rigidBody = GetComponent<Rigidbody2D>();
 			_keyInput = keyInput;
-			Debug.Log(keyInput);
         }
 
 		void Update()
