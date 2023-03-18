@@ -2,10 +2,10 @@ using UnityEngine;
 
 namespace FlappyBird.Events
 {
-	public class BirdHitThePipeSignal
+	public class BirdHitThePipeUISignal
 	{
 
-		public BirdHitThePipeSignal(GameObject gameOverScreen)
+		public BirdHitThePipeUISignal(GameObject gameOverScreen)
 		{
 			GameOverScreen = gameOverScreen;
 		}

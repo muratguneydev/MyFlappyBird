@@ -14,8 +14,8 @@ public class BirdInstaller : Installer<BirdSettings, BirdInstaller>
 	{
 		Container.Bind<Jumper>().AsSingle().WithArguments(_birdSettings.JumpUpVelocity).NonLazy();
 
-		Container.DeclareSignal<BirdHitThePipeSignal>();
-		Container.BindSignal<BirdHitThePipeSignal>()
+		Container.DeclareSignal<BirdHitThePipeUISignal>();
+		Container.BindSignal<BirdHitThePipeUISignal>()
             .ToMethod<GameController>(x => x.OnBirdHitThePipe)
 			.FromResolve();
 	}

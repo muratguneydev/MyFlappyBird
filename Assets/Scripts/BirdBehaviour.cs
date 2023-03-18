@@ -39,7 +39,7 @@ namespace FlappyBird
 		void OnCollisionEnter2D(Collision2D collision)
 		{
 			//if (collision.gameObject.GetComponent<PipeBehaviour>())
-			_eventBus.Fire(new BirdHitThePipeSignal(_gameOverScreen));//Remove parameter. Let the receiver collect what they need.
+			_eventBus.Fire(new BirdHitThePipeUISignal(_gameOverScreen));//Remove parameter. Let the receiver collect what they need.
 		}
 
 		public void OnGameOver(GameOverSignal gameOverSignal)

@@ -21,7 +21,7 @@ public class BirdBehaviourTests
 	public void Should_FireBirdHitThePipeSignal_WhenCollided()
 	{
 		//Arrange
-		var eventBusSpy = new EventBusSpy<BirdHitThePipeSignal>();
+		var eventBusSpy = new EventBusSpy<BirdHitThePipeUISignal>();
 		var birdBehaviourWrapper = SetUpBirdBehaviourForCollusion(eventBusSpy);
 		//Act
 		birdBehaviourWrapper.OnCollisionEnter2D(new Collision2D());
@@ -39,7 +39,7 @@ public class BirdBehaviourTests
 	private MonoReflector<BirdBehaviour> SetUpBirdBehaviourForJump(Jumper jumper)
 	{
 		var birdBehaviourWrapper = new MonoReflector<BirdBehaviour>();
-		birdBehaviourWrapper.MonoBehaviour.Construct(new EventBusSpy<BirdHitThePipeSignal>(), jumper, new KeyInputStub(KeyCode.Space));
+		birdBehaviourWrapper.MonoBehaviour.Construct(new EventBusSpy<BirdHitThePipeUISignal>(), jumper, new KeyInputStub(KeyCode.Space));
 		return birdBehaviourWrapper;
 	}
 }

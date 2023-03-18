@@ -33,7 +33,7 @@ public class BirdTests : ZenjectIntegrationTestFixture
 	[Test]
 	public void Should_FireBirdHitThePipeSignal_WhenCollided()
 	{
-		var eventBusSpy = new EventBusSpy<BirdHitThePipeSignal>();
+		var eventBusSpy = new EventBusSpy<BirdHitThePipeUISignal>();
 
 		PreInstall();
 
@@ -81,7 +81,7 @@ public class BirdTests : ZenjectIntegrationTestFixture
 		//Note:Alternative to the EventBusSpy, this can be used.
 		//var eventBus = container.Resolve<IEventBus>();
 		//eventBus.Subscribe<BirdHitThePipeSignal>(OnBirdHitThePipe);
-		var eventBusSpy = new EventBusSpy<BirdHitThePipeSignal>();
+		var eventBusSpy = new EventBusSpy<BirdHitThePipeUISignal>();
 		bird.Construct(eventBusSpy, container.Resolve<Jumper>(), container.Resolve<KeyInput>());
 		//Act
 		gameObject.transform.position = pipePrefab.transform.position;

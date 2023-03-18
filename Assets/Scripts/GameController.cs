@@ -19,10 +19,10 @@ namespace FlappyBird
 			SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 			onResetButtonClickedUISignal.GameOverScreen.SetActive(false);
 			//
-			_eventBus.Fire(new GameResetSignal(onResetButtonClickedUISignal.GameOverScreen));//TODO: remove the gameover screen parameter?
+			_eventBus.Fire(new GameResetSignal());
 		}
 
-		public void OnBirdHitThePipe(BirdHitThePipeSignal birdHitThePipeSignal)
+		public void OnBirdHitThePipe(BirdHitThePipeUISignal birdHitThePipeSignal)
 		{
 			birdHitThePipeSignal.GameOverScreen.SetActive(true);
 			_eventBus.Fire(new GameOverSignal());
