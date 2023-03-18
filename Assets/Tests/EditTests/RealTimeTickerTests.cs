@@ -21,14 +21,4 @@ public class RealTimeTickerTests
 		timer.Tick();
 		Assert.IsTrue(invokerSpy.IsInvoked);
 	}
-
-	private class InvokerSpy : IInvokable
-	{
-		public bool IsInvoked { get; private set; }
-
-		public void Invoke()
-		{
-			IsInvoked = true;
-		}
-	}
 }

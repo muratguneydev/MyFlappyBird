@@ -13,7 +13,7 @@ namespace FlappyBird
 
 		public void OnBirdHitThePipe(BirdHitThePipeSignal birdHitThePipeSignal)
 		{
-			//gameResetSignal.GameOverScreen.SetActive(true);
+			birdHitThePipeSignal.GameOverScreen.SetActive(true);
 		}
 	}
 }

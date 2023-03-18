@@ -24,7 +24,6 @@ namespace FlappyBird
 			if (gameObject.transform.position.x > _deadZoneX)
 				return;
 
-			gameObject.SetActive(false);
 			_objectDestroyer.Destroy(gameObject);
 			Debug.Log("Destroyed.");
 		}

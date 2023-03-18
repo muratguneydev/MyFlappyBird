@@ -17,6 +17,9 @@ https://www.youtube.com/watch?v=arzREy5zLVU
 https://blog.unity.com/technology/testing-test-driven-development-with-the-unity-test-runner
 https://www.dima.to/blog/how-to-play-mode-unit-test-a-prefab-in-unity/
 
+DI in Unit tests:
+https://github.com/modesttree/Zenject/blob/master/Documentation/WritingAutomatedTests.md
+
 Play Mode testing:
 https://github.com/Unity-Technologies/test-framework-training/tree/test-solution/Assets/PlaymodeTests
 https://forum.unity.com/threads/monobehaviourtest-t0.469749/

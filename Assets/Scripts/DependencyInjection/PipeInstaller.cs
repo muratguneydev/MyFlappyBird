@@ -21,6 +21,7 @@ public class PipeInstaller : Installer<PipeSettings, PipeSpawnerSettings, PipeIn
 			.FromResolve();
 
 		Container.Bind<ObjectDestroyer>().AsSingle();
+		Container.Bind<LeftMover>().AsSingle().WithArguments(_pipeSettings.MoveSpeed);
 		Container.Bind<Destroyer>()
 			//.FromInstance(new Destroyer(-23))
 			.AsSingle();

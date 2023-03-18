@@ -15,6 +15,7 @@ MonoBehaviour:
   PipeSettings:
     PipePrefab: {fileID: 7277575032314013017, guid: 65322daf32f7645e2828ddb5ff2ce85c, type: 3}
     PipeDeadZoneX: -23
+    MoveSpeed: 5
   PipeSpawnerSettings:
     HeightOffset: 13
     SpawnFrequencySeconds: 4

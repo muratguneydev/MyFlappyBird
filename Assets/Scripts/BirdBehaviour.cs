@@ -7,6 +7,7 @@ namespace FlappyBird
 	[RequireComponent(typeof(Rigidbody2D))]
 	public class BirdBehaviour : MonoBehaviour
 	{
+		[SerializeField] private GameObject _gameOverScreen;
 		private Jumper _jumper;
 		private Rigidbody2D _rigidBody;
 		private KeyInput _keyInput;
@@ -29,7 +30,8 @@ namespace FlappyBird
 
 		private void OnCollisionEnter2D(Collision2D collision)
 		{
-			_eventBus.Fire(new BirdHitThePipeSignal());
+			//if (collision.gameObject.GetComponent<PipeBehaviour>())
+			_eventBus.Fire(new BirdHitThePipeSignal(_gameOverScreen));
 		}
 	}
 }

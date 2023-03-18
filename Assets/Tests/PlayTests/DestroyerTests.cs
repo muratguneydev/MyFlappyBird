@@ -15,7 +15,7 @@ public class DestroyerTests
 		var pipePrefab = PipePrefab.Create();
 		var container = new DiContainer(StaticContext.Container);
 		container.Install<CoreInstaller>();
-		PipeInstaller.Install(container, new PipeSettings(pipePrefab, deadZoneX), new PipeSpawnerSettings());
+		PipeInstaller.Install(container, new PipeSettings(pipePrefab, deadZoneX, 5), new PipeSpawnerSettings());
 
 		var eventBus = container.Resolve<IEventBus>();
 		Assert.That(eventBus is not null);
