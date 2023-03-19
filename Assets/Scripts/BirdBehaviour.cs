@@ -8,21 +8,22 @@ namespace FlappyBird
 	public class BirdBehaviour : MonoBehaviour
 	{
 		[SerializeField] private GameObject _gameOverScreen;
-		private Jumper _jumper;
+		
 		private Rigidbody2D _rigidBody;
 		private KeyInput _keyInput;
 		private IEventBus _eventBus;
-		private bool _canJump = true;
+		private bool _isGameOver;
+
+		private JumperFactory _jumperFactory;
 
 		[Inject]
-        public virtual void Construct(IEventBus eventBus, Jumper jumper, KeyInput keyInput)
+        public virtual void Construct(IEventBus eventBus, JumperFactory jumperFactory)
         {
             _eventBus = eventBus;
 			_eventBus.Subscribe<GameResetSignal>(OnGameReset);
 			_eventBus.Subscribe<GameOverSignal>(OnGameOver);
 
-			_jumper = jumper;
-			_keyInput = keyInput;
+			_jumperFactory = jumperFactory;//Note: JumperFactory is used here to take out the logic from MonoBehaviour and leave it as humble object.
         }
 
 		void Start()
@@ -32,8 +33,9 @@ namespace FlappyBird
 
 		void Update()
 		{
-			if (_canJump && _keyInput.GetKeyDown(KeyCode.Space))
-				_jumper.Move(_rigidBody);
+			_jumperFactory
+				.Get(_isGameOver)
+				.Move(_rigidBody);
 		}
 
 		void OnCollisionEnter2D(Collision2D collision)
@@ -44,12 +46,12 @@ namespace FlappyBird
 
 		public void OnGameOver(GameOverSignal gameOverSignal)
 		{
-			_canJump = false;
+			_isGameOver = true;
 		}
 
 		public void OnGameReset(GameResetSignal gameResetSignal)
 		{
-			_canJump = true;
+			_isGameOver = false;
 		}
 	}
 }

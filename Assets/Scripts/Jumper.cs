@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlappyBird
 {
-	public class Jumper : IMove
+	public class Jumper
 	{
 		private readonly Rigidbody2D rigidbody;
 		private readonly int _jumpUpVelocity;

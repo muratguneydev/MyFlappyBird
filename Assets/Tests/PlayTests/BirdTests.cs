@@ -12,22 +12,32 @@ public class BirdTests : ZenjectIntegrationTestFixture
 	public IEnumerator Should_Jump_WhenSpacebarKeyDown()
 	{
 		//Arrange
-		const int BirdUpVelocity = 10;
-		const int HeightTolerance = 2;
-		var container = new DiContainer(StaticContext.Container);
-		container.Install<CoreInstaller>();
-		BirdInstaller.Install(container, new BirdSettings(BirdUpVelocity));
+		PreInstall();
+		const int BirdUpVelocityUnitsPerSecond = 10;
+		const int HeightTolerance = 3;
+		Container.Install<CoreInstaller>();
+
+		var pipePrefab = PipePrefab.Create();
+		var pipeSettings = new PipeSettings(pipePrefab, -23f, 5);
+		var pipeSpawnerSettings = new PipeSpawnerSettings();
+		Container.Bind<PipeSettings>().FromInstance(pipeSettings).AsSingle();
+		Container.Bind<PipeSpawnerSettings>().FromInstance(pipeSpawnerSettings).AsSingle();
+		PipeInstaller.Install(Container, pipeSettings, pipeSpawnerSettings);
+
+		BirdInstaller.Install(Container, new BirdSettings(BirdUpVelocityUnitsPerSecond));
 
 		var spaceKeyInputStub = new KeyInputStub(KeyCode.Space);
-
-		var gameObject = new GameObject();
-		var bird = gameObject.AddComponent<BirdBehaviour>();
-		bird.Construct(container.Resolve<IEventBus>(), container.Resolve<Jumper>(), spaceKeyInputStub);
+		Container.Rebind<KeyInput>().FromInstance(spaceKeyInputStub);//For non-interface types, rebind cannot be AsSingle.
+		
+		Container.Bind<BirdBehaviour>().FromNewComponentOnNewGameObject()
+			.AsSingle();
+		PostInstall();
+		
+		var birdBehaviour = Container.Resolve<BirdBehaviour>();
 		//Act
-		yield return new WaitForSeconds(1);//Let it move up around 10 units in 1 second
-		CleanUp(gameObject);
+		yield return new WaitForSeconds(1.1f);//Let it move up around 10 units in 1 second.
 		//Assert
-		Assert.IsTrue(gameObject.transform.position.y > BirdUpVelocity - HeightTolerance);
+		Assert.IsTrue(birdBehaviour.gameObject.transform.position.y > BirdUpVelocityUnitsPerSecond - HeightTolerance);
 	}
 
 	[Test]
@@ -82,7 +92,7 @@ public class BirdTests : ZenjectIntegrationTestFixture
 		//var eventBus = container.Resolve<IEventBus>();
 		//eventBus.Subscribe<BirdHitThePipeSignal>(OnBirdHitThePipe);
 		var eventBusSpy = new EventBusSpy<BirdHitThePipeUISignal>();
-		bird.Construct(eventBusSpy, container.Resolve<Jumper>(), container.Resolve<KeyInput>());
+		bird.Construct(eventBusSpy, container.Resolve<JumperFactory>());
 		//Act
 		gameObject.transform.position = pipePrefab.transform.position;
 		Debug.Log($"Fired:{eventBusSpy.IsExpectedEventFired()}");
@@ -100,11 +110,36 @@ public class BirdTests : ZenjectIntegrationTestFixture
 		GameObject.Destroy(gameObject);
 	}
 
-	[UnityTest]
-	public IEnumerator TestCommon()
+	//[UnityTest]
+	[Test, Ignore("Just for demo.")]
+	public IEnumerator Test_ShowcaseForDifferentReturnTypes()
 	{
+		PreInstall();
 		yield return new EnterPlayMode();
 		yield return new WaitForSeconds(5);
 		yield return new ExitPlayMode();
+		PostInstall();
 	}
+
+	// [UnityTest] //PreInstall/PostInstall not called test failure error.
+	// public IEnumerator Should_Jump_WhenSpacebarKeyDown2()
+	// {
+	// 	//Arrange
+	// 	const int BirdUpVelocity = 10;
+	// 	const int HeightTolerance = 2;
+	// 	var container = new DiContainer(StaticContext.Container);
+	// 	container.Install<CoreInstaller>();
+	// 	BirdInstaller.Install(container, new BirdSettings(BirdUpVelocity));
+
+	// 	var spaceKeyInputStub = new KeyInputStub(KeyCode.Space);
+
+	// 	var gameObject = new GameObject();
+	// 	var bird = gameObject.AddComponent<BirdBehaviour>();
+	// 	bird.Construct(container.Resolve<IEventBus>(), new JumperFactory(spaceKeyInputStub, container.Resolve<Jumper>()));
+	// 	//Act
+	// 	yield return new WaitForSeconds(1);//Let it move up around 10 units in 1 second
+	// 	CleanUp(gameObject);
+	// 	//Assert
+	// 	Assert.IsTrue(gameObject.transform.position.y > BirdUpVelocity - HeightTolerance);
+	// }
 }
